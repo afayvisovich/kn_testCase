@@ -1,0 +1,25 @@
+Write a NodeJS-based solution in JavaScript, using Express framework and ES6 language features.
+The solution, upon request to its REST interface, should:
+- asynchronously read data from a table in database into array of objects with fields id, code, name
+- filter acquired data with all of the following rules: id field is not null, empty or undefined, AND code strictly equal to string "025", AND name contains text "test"
+Then solution should take the filtered array of objects and send it asynchronously to a SOAP web service (compose a request, underlying HTTP call can be mocked)
+After that solution should respond with data received from web-service. 
+Solution interface should conform to REST standard.
+
+
+DB: table codeNames
+
+create table codenames(id INTEGER, code VARCHAR, name VARCHAR)
+
+insert --->
+
+ id |  code   |         name          
+----+---------+-----------------------
+    | 03325   | test
+  3 | 025     | test //// '025 ' instead of '025'
+ 31 | 222025  | tsssrsfest
+  1 | 025     | Some text and not a test
+  5 | 025     | some name
+  7 | 025     | testing filter
+(6 rows)
+

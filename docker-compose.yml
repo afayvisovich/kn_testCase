@@ -1,0 +1,29 @@
+version: "3"
+services:
+  tcase:
+    container_name: tcase
+    build:
+      context: .
+      dockerfile: dockerfile
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:123@postgres:5432/tcase
+      NODE_ENV: development
+      PORT: 8888
+    ports:
+      - "8888:8888"
+  postgres:
+    container_name: postgres
+    image: postgres:14
+    ports:
+      - "5444:5432"
+    volumes: 
+      - ./postgresdata:/var/lib/postgresql/data
+      - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+volumes:
+    db-data:
